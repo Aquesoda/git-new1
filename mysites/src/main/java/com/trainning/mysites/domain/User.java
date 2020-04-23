@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer uid;
 
-    @Column(length = 30)
+    @Column(length = 30,unique = true)
     @NotNull
     private String account;
     @Column(length = 30)
@@ -36,7 +36,7 @@ public class User {
 
     private Integer logincount; //登录次数
 
-    private Integer validstate; //用户是否有效
+    private Integer vaildstate = 1; //用户是否有效 0表示无效，1表示有效
 
     public Integer getUid() {
         return uid;
@@ -118,12 +118,12 @@ public class User {
         this.logincount = logincount;
     }
 
-    public Integer getValidstate() {
-        return validstate;
+    public Integer getvaildstate() {
+        return vaildstate;
     }
 
-    public void setValidstate(Integer validstate) {
-        this.validstate = validstate;
+    public void setvaildstate(Integer vaildstate) {
+        this.vaildstate = vaildstate;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", lasttime=" + lasttime +
                 ", logincount=" + logincount +
-                ", validstate=" + validstate +
+                ", vaildstate=" + vaildstate +
                 '}';
     }
 }
