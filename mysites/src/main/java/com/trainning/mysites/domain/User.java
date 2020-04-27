@@ -2,7 +2,9 @@ package com.trainning.mysites.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -20,19 +22,28 @@ public class User {
     private String password;
     @Column(length = 30)
     private String name;
-
+    //枚举的使用
     public enum Sex{
-      男,女
+      男,女;//枚举中常量结束位置要有分号
+        //将枚举数据转换成了一个列表
+        public static List<String> toList(){
+            Sex[] sex = Sex.values();
+            List<String> datas = new ArrayList<>();
+            for (Sex s : sex) {
+                datas.add(s.name());
+            }
+            return datas;
+        }
     };
     private Sex grander;
 
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     @Column(length = 11)
     private String mobile;
     @Column(length = 100)
     private String email;
 
-    private Integer lasttime;   //最后登陆时间
+    private Integer lasttime;   //最后登陆时间  处理整形日期
 
     private Integer logincount; //登录次数
 
@@ -78,11 +89,11 @@ public class User {
         this.grander = grander;
     }
 
-    public LocalDateTime getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDateTime birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Instant;
 import java.util.List;
 
 
@@ -21,6 +22,9 @@ public class UserServiceImpl  implements UserService {
     @Override
     public void save(User u)throws Exception {
         try {
+            //存储当前的登陆时间
+            u.setLasttime((int)Instant.now().getEpochSecond());
+
             userRepository.save(u);
             }catch (Exception ex){
             throw ex;
