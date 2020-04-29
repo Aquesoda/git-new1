@@ -1,11 +1,13 @@
 package com.trainning.mysites.configuration;
 
 
+import com.trainning.mysites.Interceptor.checkUserInterceptor;
 import com.trainning.mysites.Utils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.text.ParseException;
@@ -15,6 +17,18 @@ import java.util.Locale;
 
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
+
+    //把拦截器作为Bean让spring管理，以防止Spring无法找到拦截器
+    @Bean
+    public checkUserInterceptor checkUserInterceptor(){
+        return new checkUserInterceptor();
+    }
+
+    //添加拦截器的配置 注册自定义的拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(checkUserInterceptor());
+    }
 
     @Bean
     public Utils utils(){

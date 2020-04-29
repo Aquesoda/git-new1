@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+    <script th:src="@{/js/jquery-3.4.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h5>登录</h5>
+    </div>
+    <!--  from时 界面变成竖向的  form-row 界面就是一排的   -->
+    <form class="form-row" th:action="@{/login}" th:object="${userLogin}" method="post">
+        <div class="col col-12">
+        <!--  一定要放到表单中去 是表单出错了 才显示  当出错时，在这里显示  alert-danger为红色标记     -->
+        <div class="row" th:if="${#fields}">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                <span th:each="err:${#fields.errors('*')}" th:text="${err}+'&nbsp;'"></span>
+            </p>
+        </div>
+<!--   所有的表单域加上row变成行         -->
+        <div class="row form-group">
+            <label for="account">账号</label>
+            <input class="form-control"  maxlength="20" th:field="*{account}" required placeholder="请输入账号">
+        </div>
+        <!--  添加一个如果有uid 则不显示密码，否则显示密码 和上面th:if相反 保证只有一个password-->
+        <div class="row form-group">
+            <label for="password">密码</label>
+            <input type="password" class="form-control" maxlength="20" th:field="*{password}" required placeholder="请输入密码">
+        </div>
+        <div class="row form-group">
+            <button type="submit" class="btn btn-primary">登录</button>
+        </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -15,7 +15,7 @@
             <h5>编辑用户</h5>
         </div>
                 <!--  from时 界面变成竖向的  form-row 界面就是一排的   -->
-        <form class="form-row" th:action="@{/saveuser}" th:object="${user}" method="post">
+        <form class="form" th:action="@{/saveuser}" th:object="${user}" method="post">
             <!--  一定要放到表单中去 是表单出错了 才显示  当出错时，在这里显示  alert-danger为红色标记     -->
             <div class="row" th:if="${#fields}">
                 <p class="alert alert-danger" th:if="${#fields.hasErrors('*')}">

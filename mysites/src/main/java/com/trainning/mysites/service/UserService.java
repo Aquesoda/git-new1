@@ -1,6 +1,7 @@
 package com.trainning.mysites.service;
 
 import com.trainning.mysites.domain.User;
+import com.trainning.mysites.domain.UserLogin;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,4 +20,8 @@ public interface UserService {
     public void deleteById(Integer uid);
 
     public void deletes(List<User> users);
+
+
+    //检测用户查询存在如数据库
+    public User checkUser(UserLogin user);
 }
